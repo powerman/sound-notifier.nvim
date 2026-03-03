@@ -1,0 +1,35 @@
+[[tools.actionlint]]
+version = "1.7.11"
+backend = "aqua:rhysd/actionlint"
+
+[[tools."aqua:Kampfkarren/selene"]]
+version = "0.30.0"
+backend = "aqua:Kampfkarren/selene"
+
+[[tools."aqua:neovim/neovim"]]
+version = "0.10.4"
+backend = "aqua:neovim/neovim"
+
+[[tools."aqua:neovim/neovim"]]
+version = "0.11.6"
+backend = "aqua:neovim/neovim"
+
+[[tools.gh]]
+version = "2.87.3"
+backend = "aqua:cli/cli"
+
+[[tools.git-cliff]]
+version = "2.12.0"
+backend = "aqua:orhun/git-cliff"
+
+[[tools.lua]]
+version = "5.1"
+backend = "vfox:mise-plugins/vfox-lua"
+
+[[tools.pandoc]]
+version = "3.9"
+backend = "github:jgm/pandoc"
+
+[[tools.stylua]]
+version = "2.3.1"
+backend = "aqua:JohnnyMorganz/StyLua"

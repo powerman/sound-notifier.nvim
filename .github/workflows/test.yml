@@ -1,0 +1,45 @@
+name: Test
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+# Cancel testing of a previous commit for the same branch.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Install packages needed to compile lua-5.1
+        uses: awalsh128/cache-apt-pkgs-action@v1
+        with:
+          packages: libreadline-dev
+
+      - uses: jdx/mise-action@v3
+      - run: git reset --hard # Work around https://github.com/jdx/mise/discussions/8270.
+
+      - name: Cache .cache
+        uses: actions/cache@v4
+        with:
+          path: .cache
+          key: build-v1-${{ runner.os }}-${{ hashFiles('.*.version') }}-${{ hashFiles('tests/.config/nvim/lazy-lock.json') }}
+          restore-keys: |
+            build-v1-${{ runner.os }}-${{ hashFiles('.*.version') }}-
+            build-v1-${{ runner.os }}-
+
+      - run: mise run deps:tests:restore
+
+      - run: mise run ci
