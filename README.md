@@ -3,8 +3,8 @@
 [![License MIT](https://img.shields.io/badge/license-MIT-royalblue.svg)](LICENSE)
 [![Neovim 0.10+](https://img.shields.io/badge/Neovim-0.10%2B-royalblue?logo=neovim&logoColor=white)](https://neovim.io/)
 [![Lua 5.1](https://img.shields.io/badge/Lua-5.1-blue)](https://www.lua.org/)
-[![Test](https://img.shields.io/github/actions/workflow/status/powerman/{REPO}/test.yml?label=test)](https://github.com/powerman/{REPO}/actions/workflows/test.yml)
-[![Release](https://img.shields.io/github/v/release/powerman/{REPO}?color=blue)](https://github.com/powerman/{REPO}/releases/latest)
+[![Test](https://img.shields.io/github/actions/workflow/status/powerman/sound-notifier.nvim/test.yml?label=test)](https://github.com/powerman/sound-notifier.nvim/actions/workflows/test.yml)
+[![Release](https://img.shields.io/github/v/release/powerman/sound-notifier.nvim?color=blue)](https://github.com/powerman/sound-notifier.nvim/releases/latest)
 
 ## About
 
