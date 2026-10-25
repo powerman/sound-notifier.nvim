@@ -5,7 +5,7 @@
 Project "sound-notifier.nvim" - Neovim plugin to play sound notifications
 when Neovim is not focused.
 
-- Minimum Neovim version: 0.10.
+- Minimum Neovim version: 0.11.
 - Lua dialect: Lua 5.1. Use `vim.*` APIs, not `io.*` or `os.*`.
 
 ### Structure
