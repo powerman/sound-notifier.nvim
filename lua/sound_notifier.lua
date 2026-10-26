@@ -12,7 +12,7 @@
 
 ---@class SoundNotifier
 ---@field _active_count number Number of tasks currently in progress
----@field _last_finished number
+---@field _finished_seq number Incremented on each task_finished to debounce deferred notifications
 ---@field _last_played number
 ---@field _delay_ms number
 ---@field _throttle_ms number
@@ -99,7 +99,7 @@ function M.new(sound_path, opts)
     opts = opts or {}
     local self = setmetatable({}, { __index = M })
     self._active_count = 0
-    self._last_finished = 0
+    self._finished_seq = 0
     self._last_played = 0
     self._delay_ms = opts.delay_ms or 3000
     self._throttle_ms = opts.throttle_ms or 1000
@@ -150,11 +150,15 @@ function M:task_finished()
     if self._active_count > 0 then
         self._active_count = self._active_count - 1
     end
-    self._last_finished = vim.uv.now()
+    -- A sequence number is used instead of comparing timestamps
+    -- because vim.uv.now() is cached per event loop iteration,
+    -- so several calls within one iteration would get equal timestamps
+    -- and each of their deferred callbacks would play the sound.
+    self._finished_seq = self._finished_seq + 1
+    local seq = self._finished_seq
 
     vim.defer_fn(function()
-        local elapsed = vim.uv.now() - self._last_finished
-        if self._active_count == 0 and elapsed >= self._delay_ms then
+        if self._active_count == 0 and seq == self._finished_seq then
             self:notify()
         end
     end, self._delay_ms)
