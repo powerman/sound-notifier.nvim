@@ -24,7 +24,7 @@ jobs:
       - uses: actions/checkout@v7
 
       - name: Install packages needed to compile lua-5.1
-        uses: awalsh128/cache-apt-pkgs-action@v1
+        uses: awalsh128/cache-apt-pkgs-action@v2
         with:
           packages: libreadline-dev
 
